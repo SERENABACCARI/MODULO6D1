@@ -1,21 +1,22 @@
-/*import {schema} from "mogoose";
+import { Schema, model } from "mongoose";
 
-const Schema= new Schema({
-    name:{
-        type:"string"
+const schema = new Schema({
+    name: {
+        type: String
     },
-    cognome:{
-        type:"string"
+    cognome: {
+        type: String
     },
-    email:{
-        type:"string"
+    email: {
+        type: String
     },
-    data:{
-        type:"number"
+    data: {
+        type: Date
     },
-    avatar:{
-        type:"string"
+    avatar: {
+        type: String
     },
-})
+});
 
-export const Authors = Mongoose.Model("collection-1",schema)*/
+
+export const Authors = model("collection-1", schema);
