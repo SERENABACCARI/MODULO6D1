@@ -7,7 +7,7 @@ const port = 3000;
 const username = encodeURIComponent("Serena88_");
 const password = encodeURIComponent("12345678@");
 
-// Importo il router API
+// ImportoNPM RUN il router API
 server.use("/api", apiRouter);
 
 // Connessione a MongoDB con Mongoose
