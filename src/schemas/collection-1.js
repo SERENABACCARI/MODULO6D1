@@ -1,6 +1,8 @@
+/*SCHEMA AUTORE*/
+
 import { Schema, model } from "mongoose";
 
-const schema = new Schema({
+const AuthorSchema = new Schema({
     name: {
         type: String
     },
@@ -19,4 +21,4 @@ const schema = new Schema({
 });
 
 
-export const Authors = model("collection-1", schema);
+export const Authors = mongoose.model("collection-1", AuthorSchema);

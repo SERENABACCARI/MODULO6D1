@@ -1,5 +1,5 @@
 //  blog posts
-import { Post } from './collection-2';
+import { Post } from '../schemas/collection-2';
 import express from 'express';
 
 const postsRouter = express.Router();

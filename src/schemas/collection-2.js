@@ -1,17 +1,24 @@
+/*SCHEMA BLOGPOST*/
+
+
 import { Schema, model } from "mongoose";
 
-const schema = new Schema({
-    name: {
-        type: String
+const PostSchema = new Schema({
+    category: {
+        type: String,
+        required:true,
     },
-    cognome: {
-        type: String
+    title: {
+        type: String,
+        reqired:true,
     },
-    email: {
-        type: String
+   cover: {
+        type: String,
+        required:true,
     },
-    data: {
-        type: Date
+    readTime: {
+        value: Number,
+        unit: String,
     },
     avatar: {
         type: String
@@ -19,4 +26,4 @@ const schema = new Schema({
 });
 
 
-export const post = model("collection-2", schema);
+export const Post = mongoose.model("collection-2", PostSchema);

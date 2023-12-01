@@ -1,5 +1,5 @@
 import express from 'express';
-import { Authors } from './schemas/collection-1.js';
+import { Authors } from '../schemas/collection-1.js';
 
 const apiRouter = express.Router();
 
@@ -15,7 +15,7 @@ apiRouter.get('/:id', async (req, res) => {
 apiRouter.post('/', async (req, res) => {
     try {
         console.log(req.body);
-        
+
         const newAuthor = new Authors(req.body);
         const savedAuthor = await newAuthor.save();
         res.status(200).json(savedAuthor);
