@@ -1,45 +1,53 @@
-import express from 'express';
-import { Authors } from '../schemas/collection-1.js';
+import express from "express"
+import authorsRouter from "./authorsRouter.js"
+import postsRouter from "./postsRouter.js"
+import multer from "multer"
+///import path from "path"
+import { CloudinaryStorage } from "multer-storage-cloudinary"   //dopo la registrazione sulla piattaforma ho istallato cloudinary (npm install cloudinary)
+import { v2 as cloudinary } from "cloudinary"   //importo la versione 1
 
-const apiRouter = express.Router();
+//CLOUDINARY_URL=cloudinary://499348822319913:xAAB7txk0rF5QVY7hCOsxyxIrys@dbonkeh7h
 
-apiRouter.get('/:id', async (req, res) => {
-    try {
-        const authors = await Authors.findById(req.params.id);
-        res.json(authors);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
-apiRouter.post('/', async (req, res) => {
-    try {
-        console.log(req.body);
+//cloudinary.config({
+//cloud_name: 'dbonkeh7h',
+//api_key: '499348822319913',
+//api_secret: '***************************'
+//});
 
-        const newAuthor = new Authors(req.body);
-        const savedAuthor = await newAuthor.save();
-        res.status(200).json(savedAuthor);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
 
-apiRouter.put('/:id', async (req, res) => {
-    try {
-        const updatedAuthors = await Authors.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(updatedAuthors);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+const cloudinaryStorage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: "EPICODE-folder-file",    //inserisco nome della cartella dove inserire file
+    },
+})
 
-apiRouter.delete('/:id', async (req, res) => {
-    try {
-        await Authors.findByIdAndDelete(req.params.id);
-        res.status(200).send();
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+const upload = multer({ storage: cloudinaryStorage })      //ho installato npm install multer-storage-cloudinary
 
-export default apiRouter;
+const apiRouter = express.Router()
+
+apiRouter.use("/authors", authorsRouter)
+apiRouter.use("/posts", postsRouter)
+
+apiRouter.patch("/multipart", upload.single("avatar"), (req, res, next) => {
+    console.log(req.file.path)
+    res.send({ url: req.file.path })
+})
+
+
+export default apiRouter
+
+
+
+
+
+
+
+
+
+
+
+//credenziali cloudinary
+//// yivegoj751@mcenb.com
+// Epic0de!

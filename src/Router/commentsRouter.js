@@ -44,7 +44,7 @@ commentsRouter.post('/', async (req, res) => {
     }
 });
 
-apiRouter.put('/:id', async (req, res) => {
+commentsRouter.put('/:id', async (req, res) => {
     try {
         const updatedComments = await Authors.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json(updatedComments);
@@ -53,7 +53,7 @@ apiRouter.put('/:id', async (req, res) => {
     }
 });
 
-apiRouter.delete('/:id', async (req, res) => {
+commentsRouter.delete('/:id', async (req, res) => {
     try {
         await comments.findByIdAndDelete(req.params.id);
         res.status(200).send();
