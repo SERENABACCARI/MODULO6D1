@@ -1,6 +1,6 @@
 /*SCHEMA AUTORE*/
+import mongoose, { Schema } from "mongoose"
 
-import { Schema, model } from "mongoose";
 
 const AuthorSchema = new Schema({
     name: {
