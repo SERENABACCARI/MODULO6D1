@@ -2,6 +2,7 @@ import express from "express"
 import authorsRouter from "./authorsRouter.js"
 import postsRouter from "./postsRouter.js"
 import multer from "multer"
+import usersRouter from "./usersRouter.js"
 /*import commentsRouter from "./commentsRouter.js"*/
 ///import path from "path"
 import { CloudinaryStorage } from "multer-storage-cloudinary"   //dopo la registrazione sulla piattaforma ho istallato cloudinary (npm install cloudinary)
@@ -31,6 +32,7 @@ const apiRouter = express.Router()
 apiRouter.use("/authors", authorsRouter)
 /*apiRouter.use("/comments", commentsRouter)*/
 apiRouter.use("/posts", postsRouter)
+apiRouter.use("/users", usersRouter)
 
 apiRouter.patch("/multipart", upload.single("avatar"), (req, res, next) => {
     console.log(req.file.path)
